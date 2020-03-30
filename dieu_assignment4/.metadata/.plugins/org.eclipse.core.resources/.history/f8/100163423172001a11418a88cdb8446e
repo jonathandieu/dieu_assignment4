@@ -1,0 +1,51 @@
+package dieu_problem1;
+import java.io.*;
+import java.util.Scanner;
+import java.util.Set;
+import java.util.LinkedHashSet;
+
+
+public class DuplicateRemover
+{
+	Set <String> uniqueWords;
+	
+	public void remove(String dataFile)
+	{
+		try
+		{
+			uniqueWords = new LinkedHashSet < > ();
+			Scanner scan = new Scanner(new File(dataFile));
+			while(scan.hasNext())
+			{
+				String next = scan.next();
+				uniqueWords.add(next.toLowerCase());
+			}
+			scan.close();
+		}
+		
+		catch(Exception e)
+		{
+			System.out.println("An error has occured when attempting to open the file.");
+		}
+	}
+	
+	public void write(String outputFile)
+	{
+		try
+		{
+			FileWriter output = new FileWriter(outputFile);
+			for(String s: uniqueWords)
+			{
+				output.write(s + " ");
+				output.close();
+			}
+		}
+		
+		catch (Exception e)
+		{
+			System.out.println("An error has occured when attempting to print the file.");
+			System.out.printf("Exception thrown: %e", e);
+		}
+	}
+
+}
